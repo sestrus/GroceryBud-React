@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react"
+import { useState } from "react"
 import { ToDoItem } from "./ToDoItem";
 export const ListContainer2 = () => {
 
@@ -19,7 +19,11 @@ export const ListContainer2 = () => {
             setNewToDo(newToDoArray)
 
         }
+        document.querySelector(".main-input").focus()
+
+        setToDo("")
     }
+
     const onClickDelete = (index) => {
         newToDo.splice(index, 1)
         setNewToDo([...newToDo])
@@ -36,7 +40,7 @@ export const ListContainer2 = () => {
         <section className="list-section">
             <div className="input-div">
                 <h1>To Do List</h1>
-                <input type="text" className="main-input" onChange={onInputUpdate} />
+                <input type="text" className="main-input" autoFocus onChange={onInputUpdate} value={toDo} />
                 <button type="button" className="add-btn" onClick={onSubmitArray} >Add</button>
             </div>
             <div>
