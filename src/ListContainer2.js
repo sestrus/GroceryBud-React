@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useCallback } from "react"
 import { ToDoItem } from "./ToDoItem";
 export const ListContainer2 = () => {
 
@@ -9,12 +9,27 @@ export const ListContainer2 = () => {
 
     }
 
-    const [newToDo, newSetToDo] = useState([])
+
+    const [newToDo, setNewToDo] = useState([])
     const onSubmitArray = () => {
-        const newToDoArray = [
-            ...newToDo, toDo
-        ]
-        newSetToDo(newToDoArray)
+        if (/[a-zA-Z]/.test(toDo)) {
+            const newToDoArray = [
+                ...newToDo, toDo
+            ]
+            setNewToDo(newToDoArray)
+
+        }
+    }
+    const onClickDelete = (index) => {
+        newToDo.splice(index, 1)
+        setNewToDo([...newToDo])
+
+    }
+    const onToDoItemUpdate = (index, content) => {
+        newToDo[index] = content
+        setNewToDo([...newToDo])
+        console.log(newToDo)
+
     }
 
     return (
@@ -25,8 +40,11 @@ export const ListContainer2 = () => {
                 <button type="button" className="add-btn" onClick={onSubmitArray} >Add</button>
             </div>
             <div>
-                {newToDo.map(toDo => <ToDoItem value={toDo} key={Math.random()} />)}
+                {newToDo.map((toDo, index) => <ToDoItem value={toDo} key={index} index={index} onDelete={() => { return onClickDelete }} onEdit={onToDoItemUpdate} />)}
             </div>
-        </section>
+            <div>
+                <button className="clear-btn" onClick={() => { setNewToDo([]) }}>Clear</button>
+            </div>
+        </section >
     )
 }

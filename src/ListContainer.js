@@ -13,7 +13,9 @@ export const ListContainer = () => {
             ...toDos, newToDo
         ]
         setNewToDos(newToDos)
+
     }
+
 
     return (
         <section className="ListContainer">
