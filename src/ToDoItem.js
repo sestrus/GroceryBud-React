@@ -23,29 +23,54 @@ export const ToDoItem = (props) => {
   };
 
   const onClickApply = () => {
-    let newArr = [...props.list];
-    newArr[props.myKey] = editInput;
-    props.onValueChange(newArr);
-    setEditVisible(!editVisible);
+    if (editInput !== "") {
+      let newArr = [...props.list];
+      newArr[props.myKey] = editInput;
+      props.onValueChange(newArr);
+      setEditVisible(!editVisible);
+    }
   };
 
   return (
-    <div className="list-item" id={`list-id${props.myKey}`}>
-      <p className="title-item">{props.value}</p>
-      {editVisible ? (
-        <button className="edit-btn" onClick={onClickEdit}>
-          Edit
+    <div className="ui segment" id={`list-id${props.myKey}`}>
+      <p
+        onClick={onClickEdit}
+        className=" left floated "
+        style={{
+          color: "#black",
+          fontFamily: "Arial",
+          fontSize: "25px",
+          fontWeight: "50",
+          textAlign: "center",
+          backgroundColor: "#E8E8E8",
+          borderRadius: "5px",
+          padding: "5px",
+        }}
+      >
+        {props.value}
+      </p>
+      <div className="ui item">
+        {editVisible ? (
+          <button className="ui button" onClick={onClickEdit}>
+            Edit
+          </button>
+        ) : (
+          <div className="ui action input right floated">
+            <input
+              type="text"
+              placeholder={props.value}
+              autoFocus
+              onChange={setEditInputFunction}
+            />{" "}
+            <button className="ui button" onClick={onClickApply}>
+              Apply
+            </button>
+          </div>
+        )}
+        <button className="ui right floated button" onClick={onClickDelete}>
+          Delete
         </button>
-      ) : (
-        <div>
-          <input type="text" onChange={setEditInputFunction} />{" "}
-          <button onClick={onClickApply}>Apply</button>
-        </div>
-      )}
-
-      <button className="delete-btn" onClick={onClickDelete}>
-        Delete
-      </button>
+      </div>
     </div>
   );
 };

@@ -18,37 +18,35 @@ export const GroceryList = () => {
       document.querySelector(".main-input").value = "";
       setToDo("");
       document.querySelector(".main-input").focus();
-    } else {
-      document.querySelector(".error-paragraph").innerHTML = "Wprowadz wartosc";
     }
   };
 
   return (
-    <div className="grocery-container">
-      <div className="grocery-input">
-        <h1 id="main-header">Grocery List</h1>
-        <p className="error-paragraph"></p>
-        <input
-          type="text"
-          className="main-input"
-          onChange={inputOnChange}
-          autoFocus
-        ></input>
-        <button type="button" onClick={onClickBtn} className="add-btn">
-          Add
-        </button>
+    <div className="ui form">
+      <div className="field">
+        <label>Enter Item</label>
+        <div className="ui action input">
+          <input
+            type="text"
+            className="main-input"
+            onChange={inputOnChange}
+            autoFocus
+          ></input>
+          <button type="button" onClick={onClickBtn} className="ui button">
+            Add
+          </button>
+        </div>
       </div>
-      <div className="grocery-list">
-        {toDoElement.map((newToDo, getKey) => (
-          <ToDoItem
-            key={getKey}
-            myKey={getKey}
-            value={newToDo}
-            onValueChange={setToDoElement}
-            list={toDoElement}
-          />
-        ))}
-      </div>
+
+      {toDoElement.map((newToDo, getKey) => (
+        <ToDoItem
+          key={getKey}
+          myKey={getKey}
+          value={newToDo}
+          onValueChange={setToDoElement}
+          list={toDoElement}
+        />
+      ))}
     </div>
   );
 };
