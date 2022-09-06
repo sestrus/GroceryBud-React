@@ -3,9 +3,7 @@ import { ToDoItem } from "./ToDoItem";
 
 export const GroceryList = () => {
   const [toDo, setToDo] = useState("");
-
   const [toDoElement, setToDoElement] = useState([]);
-
   let getKey;
 
   const inputOnChange = (event) => {
@@ -16,7 +14,6 @@ export const GroceryList = () => {
     if (toDo !== "") {
       const toDoStorage = [...toDoElement, toDo];
       setToDoElement(toDoStorage);
-      console.log(toDoStorage);
       getKey = Math.random();
       document.querySelector(".main-input").value = "";
       setToDo("");
@@ -43,7 +40,13 @@ export const GroceryList = () => {
       </div>
       <div className="grocery-list">
         {toDoElement.map((newToDo, getKey) => (
-          <ToDoItem key={getKey} myKey={getKey} value={newToDo} />
+          <ToDoItem
+            key={getKey}
+            myKey={getKey}
+            value={newToDo}
+            onValueChange={setToDoElement}
+            list={toDoElement}
+          />
         ))}
       </div>
     </div>
